@@ -21,4 +21,3 @@ test/sourcemaps/*.css
 
 # bower
 bower_components
-dist/less-browser-core.js
