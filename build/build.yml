@@ -25,8 +25,9 @@ prepend:
 append:
   amd:     build/amd.js
   browser: <%= build.lib %>/browser.js
+  browsercore: <%= build.lib %>/browser-core.js
   rhino:   <%= build.lib %>/rhino.js
-
+  createstylesheet: 'bower_components/create-stylesheet/dist/create-stylesheet.unwrapped.js'
 
 # =================================
 # Core less files
@@ -48,6 +49,35 @@ less:
   browser          : <%= build.lib %>/browser.js
   source_map_output: <%= build.lib %>/source-map-output.js
 
+
+# =================================
+# Browser build
+# =================================
+
+# <%= build.browser %>
+browsercore:
+
+  # prepend utils
+  - <%= build.prepend.browser %>
+
+  # core
+  - <%= build.less.parser %>
+  - <%= build.less.functions %>
+  - <%= build.less.colors %>
+  - <%= build.less.tree %>
+  - <%= build.less.treedir %> # glob all files
+  - <%= build.less.env %>
+  - <%= build.less.visitor %>
+  - <%= build.less.import_visitor %>
+  - <%= build.less.join %>
+  - <%= build.less.to_css_visitor %>
+  - <%= build.less.extend_visitor %>
+  - <%= build.less.source_map_output %>
+
+  # append browser-core-specific code
+  - <%= build.append.createstylesheet %>
+  - <%= build.append.browsercore %>
+  - <%= build.append.amd %>
 
 # =================================
 # Browser build

@@ -57,6 +57,10 @@ module.exports = function(grunt) {
         src: ['<%= build.browser %>'],
         dest: 'test/browser/less.js'
       },
+      browsercore: {
+            src: ['<%= build.browsercore %>'],
+            dest: 'dist/less-browser-core.js'
+      },
       stable: {
         src: ['<%= build.browser %>'],
         dest: 'dist/less-<%= pkg.version %>.js'
@@ -211,7 +215,8 @@ module.exports = function(grunt) {
     // Clean the version of less built for the tests
     clean: {
       test: ['test/browser/less.js', 'tmp'],
-      "sourcemap-test": ['test/sourcemaps/*.css', 'test/sourcemaps/*.map']
+      "sourcemap-test": ['test/sourcemaps/*.css', 'test/sourcemaps/*.map'],
+      browsercore: ['dist/less-browser-core.js']
     }
   });
 
@@ -271,5 +276,11 @@ module.exports = function(grunt) {
   // Readme.
   grunt.registerTask('readme', [
     'concat:readme'
+  ]);
+
+  // browser-core
+  grunt.registerTask('browsercore', [
+      'clean:browsercore',
+      'concat:browsercore'
   ]);
 };

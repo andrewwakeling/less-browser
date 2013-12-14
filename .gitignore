@@ -18,3 +18,7 @@ test/sourcemaps/*.css
 
 # grunt
 .grunt
+
+# bower
+bower_components
+dist/less-browser-core.js
