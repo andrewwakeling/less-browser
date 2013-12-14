@@ -10,7 +10,7 @@ There has been [confusion](https://github.com/less/less-docs/issues/6) over whet
 My opinion is that the ability for LESS to run client-side on the browser, is LESS's strongest and unique feature in comparison to other stylesheet languages.
 This is my work to make that feature *shine*.
 
-# What happened to "that" feature in less.js?
+## What happened to "that" feature in less.js?
 A large majority of functionality was cut out of the original browser.js to provide a more predictable and concise API, which I have labelled "browser-core".
 A lot of thought was put into this reduction and I believe that it would be possible to recreate existing functionality by utilizing the new API of browser-core.
 
