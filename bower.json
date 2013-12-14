@@ -1,7 +1,10 @@
 {
-  "name": "less-browser",
-  "version": "1.5.1",
-  "dependencies": {
+    "name": "less-browser",
+    "version": "1.5.1",
+    "ignore": [
+        "bower.json"
+    ],
+    "dependencies": {
         "create-stylesheet": "git://github.com/andrewwakeling/create-stylesheet#v0.1.0"
-  }
+    }
 }
