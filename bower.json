@@ -14,5 +14,8 @@
         "Gruntfile.js",
         "package.json",
         "bower.json"
-    ]
+    ],
+    "dependencies": {
+        "create-stylesheet": "git://github.com/andrewwakeling/create-stylesheet#v0.1.0"
+    }
 }
