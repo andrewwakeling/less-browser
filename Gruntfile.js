@@ -281,6 +281,7 @@ module.exports = function(grunt) {
   // browser-core
   grunt.registerTask('browsercore', [
       'clean:browsercore',
+      'jshint',
       'concat:browsercore'
   ]);
 };
