@@ -16,6 +16,6 @@
         "bower.json"
     ],
     "dependencies": {
-        "create-stylesheet": "git://github.com/andrewwakeling/create-stylesheet#v0.1.0"
+        "create-stylesheet": "git://github.com/andrewwakeling/create-stylesheet#v0.2.0"
     }
 }
