@@ -44,7 +44,8 @@ It is not aware of LESS templates defined in link tags but instead, encourages y
 *TODO More documentation coming shortly*
 
 ## API
-`loadTemplate(url, options, callback)`
+`renderTemplate(url, options, callback(err, style, identifier)`
+`loadTemplate(url, options, callback(err, render(err, style, identifier)))`
 `removeTemplate(...)`
 
 *TODO: More documentation coming shortly*

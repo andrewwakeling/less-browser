@@ -6410,7 +6410,11 @@ var _stylesheet = {
     },
     removeStyleSheet: removeStyleSheet
 };
-/* global less, window, _stylesheet */
+/**
+ * browser-core.js - A significantly cut-down and refactored version of browser.js intended for usage in production
+ *
+ * Minimum usage requires the declaration of less.templateLoader = function(url, options, callback(err, data)).
+ */
 
 /**
  * Describe an error as a string.
@@ -6675,11 +6679,11 @@ function createCSS(id, css, callback) {
 }
 
 /**
- * Load a LESS template into the DOM. If this template already exists in the DOM, it will be replaced.
+ * Load a LESS template but do not place it into the DOM until render() is called.
  *
  * @param url
  * @param options (see below)
- * @param callback - function(err, style, identifier)
+ * @param callback - function(err, render(err, style, identifier))
  *
  * Options
  * templateLoaderOptions - an object which will be passed to the templateLoader handler. (Used to customize behaviour of templateLoader).
@@ -6689,7 +6693,7 @@ function createCSS(id, css, callback) {
  *
  * For a better understand for the prependVars and appendVars requirement, see here: https://github.com/less/less.js/commit/daec7dff1c5d533bfaaee5315aa20c9bf56f1873
  */
-less.loadTemplate = function (url, options, callback) {
+function loadTemplate(url, options, callback) {
     var env = new less.tree.parseEnv(less);
     // To reduce property collision, place all browser settings into their own property.
     env.browser = {};
@@ -6707,13 +6711,34 @@ less.loadTemplate = function (url, options, callback) {
         if (err) {
             return callback(describeError(err, absoluteURL));
         } else {
-            createCSS(absoluteURL, css, function (err, style) {
-                if (err) {
-                    callback(describeError(err, absoluteURL));
-                } else {
-                    callback(null, style, absoluteURL);
-                }
-            });
+            var render = function(cb) {
+                createCSS(absoluteURL, css, function (err, style) {
+                    if (err) {
+                        cb(describeError(err, absoluteURL));
+                    } else {
+                        cb(null, style, absoluteURL);
+                    }
+                });
+            };
+
+            callback(null, render);
+        }
+    });
+}
+less.loadTemplate = loadTemplate;
+
+/**
+ * Load and render the template into the DOM. If this template already exists in the DOM, it will be replaced.
+ * @param url
+ * @param options
+ * @param callback(err, style, identifier)
+ */
+less.renderTemplate = function (url, options, callback) {
+    loadTemplate(url, options, function (err, render) {
+        if (err) {
+            callback(err);
+        } else {
+            render(callback);
         }
     });
 };
@@ -6737,6 +6762,7 @@ less.Parser.fileLoader = loadFile;
 
 // TODO: Provide a function to remove templates by id.
 less.removeTemplate = null;
+
 // amd.js
 //
 // Define Less as an AMD module.
