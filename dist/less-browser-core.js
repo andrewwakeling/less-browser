@@ -6286,7 +6286,7 @@ tree.Variable.prototype = {
 
 })(require('./tree'));
 
-// create-stylesheet 0.2.0
+// create-stylesheet 0.2.2
 // Andrew Wakeling <andrew.wakeling@gmail.com>
 // create-stylesheet may be freely distributed under the MIT license.
 var _stylesheet = {};
@@ -6379,7 +6379,7 @@ function createStyleSheet(options, callback) {
                     removeStyleSheet(style);
                     callback(err);
                 } else {
-                    // TODO: If we want to transfer any attributes from an existing style node, this is the time and place to do it.
+                    // TODO: Desirable to duplicate attributes to the new stylesheet. (I have seen some unusual things in IE8 so I do not think this is trivial).
                     if (options.replace) {
                         removeStyleSheet(options.replace);
                     }
@@ -6389,8 +6389,7 @@ function createStyleSheet(options, callback) {
         }
     });
 }
-
-var _stylesheet = {
+_stylesheet = {
     appendStyleSheet: function (css, callback) {
         createStyleSheet({
             css: css
