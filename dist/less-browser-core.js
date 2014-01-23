@@ -6763,6 +6763,9 @@ less.Parser.fileLoader = loadFile;
 // TODO: Provide a function to remove templates by id.
 less.removeTemplate = null;
 
+// TODO: If we really want to re-use create-stylesheet stuff we should refactor this code to be better modularized.
+less.stylesheettools = _stylesheet;
+
 // amd.js
 //
 // Define Less as an AMD module.
